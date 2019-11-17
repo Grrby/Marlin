@@ -1898,7 +1898,6 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
   + ENABLED(LCD_FOR_MELZI) \
   + ENABLED(ULTI_CONTROLLER) \
   + ENABLED(MKS_MINI_12864) \
-  + ENABLED(ENDER2_DISPLAY) \
   + ENABLED(FYSETC_MINI_12864_X_X) \
   + ENABLED(FYSETC_MINI_12864_1_2) \
   + ENABLED(FYSETC_MINI_12864_2_0) \
@@ -1917,10 +1916,10 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
   + ENABLED(MALYAN_LCD) \
   + ENABLED(LULZBOT_TOUCH_UI) \
   + ENABLED(FSMC_GRAPHICAL_TFT)
-  //#error "Please select no more than one LCD controller option."
-  #if COUNT_LCD_24 > 1
-    #error "Please select no more than one LCD controller option."
-  #endif
+  #error "Please select no more than one LCD controller option."
+  //#if COUNT_LCD_24 > 1
+    //#error "Please select no more than one LCD controller option."
+  //#endif
 #endif
 
 #undef IS_RRD_SC

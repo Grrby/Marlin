@@ -41,7 +41,8 @@
 
 #define FLASH_EEPROM_EMULATION
 #define EEPROM_PAGE_SIZE     uint16(0x800) // 2KB
-#define EEPROM_START_ADDRESS uint32(0x8000000 + STM32_FLASH_SIZE - 2 * EEPROM_PAGE_SIZE)
+//#define EEPROM_START_ADDRESS uint32(0x8000000 + STM32_FLASH_SIZE - 2 * EEPROM_PAGE_SIZE)
+#define EEPROM_START_ADDRESS uint32(0x8000000 + 512 * 1024 - 2 * EEPROM_PAGE_SIZE) //change 256->512 to move EEPROM to end of 512K program space, since F103RC has undocumented 512K program space
 #undef E2END
 #define E2END                (EEPROM_PAGE_SIZE - 1) // 2KB
 
@@ -176,7 +177,7 @@
  *                 EXP1
  */
 #if HAS_SPI_LCD
-  #define BEEPER_PIN       PA15
+  // #define BEEPER_PIN       PA15
   #define BTN_ENC          PB6
 
   #if ENABLED(CR10_STOCKDISPLAY)
@@ -192,8 +193,18 @@
     //#error "Only CR10_STOCKDISPLAY is currently supported on the BIGTREE_SKR_E3_DIP."
   #endif
  /////////////////////////////////////////////////////////////////////////////////////////
+ /**ENDER2 MINIDISPLAY
+ *                   _____
+ *               5V | · · | GND
+ *      (MOSI) PB7  | · · | PB8  (LCD_RS)
+ *    (LCD_A0) PB9  | · · | PA10 (BTN_EN2)
+ *            RESET | · · | PA9  (BTN_EN1)
+ *   (BTN_ENC) PB6  | · · | PA15 (SCK)
+ *                   -----
+ *                    EXP1
+ */
  
-      #if ENABLED(ENDER2_DISPLAY)
+      #if ENABLED(MKS_MINI_12864)
         #define BTN_EN1      PA9
         #define BTN_EN2      PA10
         #define DOGLCD_CS    PB8
